@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// esquema de la base de datos
+enum Gender {
+  MASCULINO
+  FEMENINO
+  UNISEX
+}
+
+enum MlSize {
+  ML_30 @map("30")
+  ML_50 @map("50")
+  ML_100 @map("100")
+}
+
+// admin users que crean los perfumes
+model AdminUser {
+  id           Int      @id
+  name         String   @db.VarChar(120)
+  username     String   @unique @db.VarChar(60)
+  email        String   @unique @db.VarChar(190)
+  passwordHash String   @db.VarChar(255)
+  image        String?  @db.VarChar(500)
+
+  perfumes     Perfume[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admin_users")
+}
+
+model Brand {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique @db.VarChar(120)
+
+  perfumes Perfume[]
+
+  @@map("brands")
+}
+
+model Perfume {
+  id           BigInt   @id @default(autoincrement())
+  ownerAdminId Int
+  brandId      Int
+
+  name         String   @db.VarChar(160)
+  gender       Gender
+  description  String   @db.VarChar(500)
+  imageUrl     String   @db.VarChar(500)
+
+  ownerAdmin   AdminUser @relation(fields: [ownerAdminId], references: [id], onUpdate: Cascade)
+  brand        Brand     @relation(fields: [brandId], references: [id], onUpdate: Cascade)
+  variants     PerfumeVariant[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([ownerAdminId])
+  @@index([brandId])
+  @@map("perfumes")
+}
+
+model PerfumeVariant {
+  id        BigInt  @id @default(autoincrement())
+  perfumeId BigInt
+
+  ml        MlSize
+  priceCop  Int
+  stockQty  Int     @default(0)
+
+  perfume   Perfume @relation(fields: [perfumeId], references: [id], onDelete: Cascade, onUpdate: Cascade) // borra variantes si borras el perfume [web:106]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([perfumeId, ml])
+  @@index([perfumeId])
+  @@map("perfume_variants")
+}
+
