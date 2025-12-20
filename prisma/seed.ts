@@ -22,6 +22,37 @@ async function main() {
             passwordHash,
         },
     });
+
+    // 2) Textos globales de categorías (1.1 y preparado)
+    await db.perfumeCategoryInfo.upsert({
+        where: { category: "ONE_ONE" },
+        update: {
+            title: "1.1",
+            description:
+                "Más duradero; un poco más caro, pero con mejor fijación y casi una réplica exacta del original.",
+        },
+        create: {
+            category: "ONE_ONE",
+            title: "1.1",
+            description:
+                "Más duradero; un poco más caro, pero con mejor fijación y casi una réplica exacta del original.",
+        },
+    });
+
+    await db.perfumeCategoryInfo.upsert({
+        where: { category: "PREPARADO" },
+        update: {
+            title: "Preparado",
+            description:
+                "Preparado con esencias para conseguir un aroma muy similar; normalmente más económico.",
+        },
+        create: {
+            category: "PREPARADO",
+            title: "Preparado",
+            description:
+                "Preparado con esencias para conseguir un aroma muy similar; normalmente más económico.",
+        },
+    });
 }
 
 main()
