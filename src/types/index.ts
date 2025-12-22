@@ -8,6 +8,7 @@ export type PerfumeCardProps = {
     name: string
     brand: string  // nombre de la marca
     gender: "MASCULINO" | "FEMENINO" | "UNISEX"
+    category: "ONE_ONE" | "PREPARADO"
     imageUrl: string
     isAvailable: boolean
 }

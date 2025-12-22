@@ -8,6 +8,7 @@ const PerfumeCard = ({
     name,
     brand,
     gender,
+    category,
     imageUrl,
     isAvailable
 }: PerfumeCardProps) => {
@@ -24,6 +25,11 @@ const PerfumeCard = ({
             default:
                 return "N/A"
         }
+    }
+
+    // funcion para troducir la categoria
+    const getCategory = (category: string) => {
+        return category === "ONE_ONE" ? "Preparado" : "1.1"
     }
 
     return (
@@ -63,14 +69,14 @@ const PerfumeCard = ({
                 </div>
 
                 {/* Marca */}
-                <p className="text-sm text-gray-600 font-extrabold">
-                    {brand}
-                </p>
+                <span className="text-sm text-gray-600 font-extrabold">
+                    {brand} · {getCategory(category)}
+                </span>
 
                 {/* Botón Ver */}
                 <Link href={`/perfumes/${id}`}>
                     <button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200">
-                        Ver
+                        Ver mas
                     </button>
                 </Link>
             </div>
