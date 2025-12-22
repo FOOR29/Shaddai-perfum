@@ -20,18 +20,25 @@ enum Gender {
   UNISEX
 }
 
+// nueva tabla
+enum AdminRole {
+  ADMIN
+  SUPER_ADMIN
+}
+
 enum PerfumeCategory {
   ONE_ONE   @map("1.1")
   PREPARADO @map("preparado")
 }
 
 model AdminUser {
-  id           Int     @id
-  name         String  @db.VarChar(120)
-  username     String  @unique @db.VarChar(60)
-  email        String  @unique @db.VarChar(190)
-  passwordHash String  @db.VarChar(255)
-  image        String? @db.VarChar(500)
+  id           Int       @id
+  name         String    @db.VarChar(120)
+  username     String    @unique @db.VarChar(60)
+  email        String    @unique @db.VarChar(190)
+  passwordHash String    @db.VarChar(255)
+  image        String?   @db.VarChar(500)
+  role         AdminRole @default(ADMIN) // conexion con la tabla roles
 
   perfumes Perfume[]
 

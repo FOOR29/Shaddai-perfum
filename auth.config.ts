@@ -38,7 +38,8 @@ export default {
                     id: user.id.toString(), // nexy auth requiere string
                     name: user.name,
                     email: user.email,
-                    image: user.image
+                    image: user.image,
+                    role: user.role
                 }
             },
         }),

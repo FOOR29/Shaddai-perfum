@@ -10,7 +10,7 @@ const { auth: middleware } = NextAuth(authConfig)
 const publicRoutes = [
     "/",
     "/login",
-    // "/error"
+    // "/eror" esta es opcional
 ]
 
 export default middleware((req) => {
