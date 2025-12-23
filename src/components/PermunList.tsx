@@ -1,8 +1,6 @@
 import { db } from "@/src/lib/db"
 import PerfumeCard from "./PerfumCard"
 
-// 1. FUNCIÓN PARA OBTENER PERFUMES
-// Esta función se ejecuta en el SERVIDOR (no en el navegador)
 async function getPerfumes() {
     try {
         // Prisma obtiene todos los perfumes con su marca relacionada
@@ -21,11 +19,9 @@ async function getPerfumes() {
     }
 }
 
-// 2. COMPONENTE PRINCIPAL
 const PerfumeList = async () => {
-    // Obtener los datos
-    const perfumes = await getPerfumes()
 
+    const perfumes = await getPerfumes()
     // Si no hay perfumes, mostrar mensaje
     if (perfumes.length === 0) {
         return (
@@ -37,7 +33,6 @@ const PerfumeList = async () => {
         )
     }
 
-    // 3. RENDERIZAR GRID DE CARDS
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
             {perfumes.map((perfume) => (
@@ -45,8 +40,9 @@ const PerfumeList = async () => {
                     key={perfume.id.toString()}  // BigInt a string para React
                     id={perfume.id}
                     name={perfume.name}
-                    brand={perfume.brand.name}  // Accedemos al nombre de la marca
+                    brand={perfume.brand.name}
                     gender={perfume.gender}
+                    category={perfume.category}
                     imageUrl={perfume.imageUrl}
                     isAvailable={perfume.isAvailable}
                 />

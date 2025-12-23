@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { PerfumeCardProps } from "../types"
+import Button from "./ui/Button"
 
 
 const PerfumeCard = ({
@@ -13,7 +14,6 @@ const PerfumeCard = ({
     isAvailable
 }: PerfumeCardProps) => {
 
-    // 2. FUNCIÓN AUXILIAR: Traduce el género del enum a texto legible
     const getGenderLabel = (gender: string) => {
         switch (gender) {
             case "MASCULINO":
@@ -27,13 +27,11 @@ const PerfumeCard = ({
         }
     }
 
-    // funcion para troducir la categoria
     const getCategory = (category: string) => {
-        return category === "ONE_ONE" ? "Preparado" : "1.1"
+        return category === "ONE_ONE" ? "1.1" : "Preparado"
     }
 
     return (
-        // 3. ESTRUCTURA: Card con diseño similar a tu imagen
         <div className="relative bg-gray-100 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
             {/* Badge de disponibilidad (solo si está disponible) */}
             {isAvailable && (
@@ -59,7 +57,7 @@ const PerfumeCard = ({
             {/* Información del perfume */}
             <div className="p-4 space-y-2">
                 {/* Nombre y género */}
-                <div className="flex items-baseline justify-between gap-2">
+                <div className="flex items-center justify-between gap-2">
                     <h3 className="font-extrabold text-lg text-gray-900 line-clamp-1">
                         {name}
                     </h3>
@@ -69,15 +67,17 @@ const PerfumeCard = ({
                 </div>
 
                 {/* Marca */}
-                <span className="text-sm text-gray-600 font-extrabold">
+                <span className="text-sm flex pb-2.5 text-gray-600 font-extrabold">
                     {brand} · {getCategory(category)}
                 </span>
 
                 {/* Botón Ver */}
                 <Link href={`/perfumes/${id}`}>
-                    <button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200">
+                    <Button
+                        className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200"
+                    >
                         Ver mas
-                    </button>
+                    </Button>
                 </Link>
             </div>
         </div>
@@ -85,3 +85,8 @@ const PerfumeCard = ({
 }
 
 export default PerfumeCard
+
+
+{/* <button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200">
+                        Ver mas
+                    </button> */}
