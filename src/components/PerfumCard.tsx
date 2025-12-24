@@ -72,7 +72,7 @@ const PerfumeCard = ({
                 </span>
 
                 {/* Botón Ver */}
-                <Link href={`/perfumes/${id}`}>
+                <Link href={`/perfum/${id}`}>
                     <Button
                         className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200"
                     >
@@ -85,8 +85,3 @@ const PerfumeCard = ({
 }
 
 export default PerfumeCard
-
-
-{/* <button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200">
-                        Ver mas
-                    </button> */}

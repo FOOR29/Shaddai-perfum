@@ -1,14 +1,17 @@
-// aca van os tipados
-
-
-
+import { PerfumeCategory } from "@prisma/client"
 
 export type PerfumeCardProps = {
-    id: number | bigint  // El id puede ser BigInt según tu schema
+    id: number | bigint
     name: string
-    brand: string  // nombre de la marca
+    brand: string
     gender: "MASCULINO" | "FEMENINO" | "UNISEX"
-    category: "ONE_ONE" | "PREPARADO"
+    category: PerfumeCategory
     imageUrl: string
     isAvailable: boolean
+}
+
+export type CategoryInfo = {
+    category: PerfumeCategory
+    title: string
+    description: string
 }
