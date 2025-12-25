@@ -26,5 +26,5 @@
 body {
   background: var(--color-fondo);
   color: var(--color-titular);
-  font-family: sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
