@@ -128,6 +128,8 @@ export default async function PerfumeDetailPage({
                 <WhatsAppButton
                     perfumeName={perfume.name}
                     brandName={perfume.brand.name}
+                    perfumeId={perfume.id.toString()}  // 👈 NUEVO
+                    gender={perfume.gender}             // 👈 NUEVO
                 />
             </main>
         </div>
