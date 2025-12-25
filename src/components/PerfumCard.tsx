@@ -27,7 +27,7 @@ const PerfumeCard = ({
     }
 
     return (
-        <div className="relative bg-card border-2 border-borde rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        <div className="relative bg-card border-2 border-borde rounded-2xl overflow-hidden duration-300">
             {/* Badge de disponibilidad (solo si está disponible) */}
             {isAvailable && (
                 <div className="absolute top-3 left-3 z-10">

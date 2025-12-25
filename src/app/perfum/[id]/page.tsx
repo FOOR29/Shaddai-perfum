@@ -53,27 +53,22 @@ export default async function PerfumeDetailPage({
 }: {
     params: Promise<{ id: string }>
 }) {
-    // Obtener el ID de los params (Next.js 15+)
     const { id } = await params
-
-    // Obtener el perfume y las categorías en paralelo
     const [perfume, categoryInfo] = await Promise.all([
         getPerfumeById(id),
         getCategoryInfo()
     ])
 
-    // Si no existe el perfume, mostrar 404
     if (!perfume) {
         notFound()
     }
 
     return (
         <div className="min-h-screen bg-background">
-            {/* Header con botón de retroceso */}
             <header className="sticky top-0 z-50 bg-white shadow-sm p-4 flex items-center gap-4">
                 <Link
                     href="/"
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-cta hover:bg-cta-hover text-cta-text transition-colors"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -86,8 +81,8 @@ export default async function PerfumeDetailPage({
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                     </svg>
                 </Link>
-                <h1 className="text-lg font-bold text-text-dark truncate">
-                    {perfume.name}
+                <h1 className="text-lg font-extrabold text-titular truncate">
+                    Shaddai Perfum
                 </h1>
             </header>
 
@@ -102,39 +97,28 @@ export default async function PerfumeDetailPage({
                         className="object-cover"
                         priority
                     />
-
-                    {/* Badge de disponibilidad */}
-                    {perfume.isAvailable && (
-                        <div className="absolute top-4 right-4">
-                            <span className="flex items-center gap-2 bg-white rounded-full px-4 py-2 text-sm font-bold shadow-lg">
-                                <span className="w-2.5 h-2.5 bg-brand-green rounded-full animate-pulse"></span>
-                                Disponible
-                            </span>
-                        </div>
-                    )}
                 </div>
 
                 {/* Información del perfume */}
                 <div className="space-y-3">
-                    {/* Marca y género */}
                     <div className="flex items-center justify-between">
-                        <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        <p className="text-sm font-semibold text-subtitulo uppercase tracking-wide">
                             {perfume.brand.name} · {getGenderLabel(perfume.gender)}
                         </p>
                     </div>
 
                     {/* Nombre */}
-                    <h2 className="text-3xl font-extrabold text-text-dark">
+                    <h2 className="text-3xl font-extrabold text-titular">
                         {perfume.name}
                     </h2>
 
                     {/* Descripción del perfume */}
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-subtitulo leading-relaxed">
                         {perfume.description}
                     </p>
                 </div>
 
-                {/* Selector de categoría con descripciones */}
+                {/* Selector de categoría */}
                 <CategorySelector
                     categoryInfo={categoryInfo}
                     defaultCategory={perfume.category}

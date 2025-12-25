@@ -38,8 +38,8 @@ const CategorySelector = ({ categoryInfo, defaultCategory }: CategorySelectorPro
                             className={`
                                 flex-1 py-3 px-4 rounded-full font-bold text-sm transition-all
                                 ${isSelected
-                                    ? "bg-brand-red text-white shadow-lg scale-105"
-                                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                    ? "bg-cta text-white shadow-lg scale-105"
+                                    : "bg-gray-100 text-subtitulo hover:bg-gray-200"
                                 }
                             `}
                         >
