@@ -16,7 +16,7 @@ export default middleware((req) => {
 
     const isPublicRoute =
         publicRoutes.includes(nextUrl.pathname) ||
-        nextUrl.pathname.startsWith("/perfum/")  // ✅ Permite /perfum/1, /perfum/2, etc.
+        nextUrl.pathname.startsWith("/perfum/")
 
     // Proteger las rutas (solo si NO es pública y NO está logueado)
     if (!isPublicRoute && !isLoggedIn) {

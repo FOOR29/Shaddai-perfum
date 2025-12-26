@@ -26,10 +26,7 @@ const GenderFilter = () => {
     ]
 
     return (
-        <div className=" px-6 py-4 border-b border-gray-200">
-            <h2 className="text-s font-extrabold text-secundario uppercase px-1.5 mb-3">
-                Filtrar por Categoría
-            </h2>
+        <div className="px-6 py-4 -mb-2.5">
 
             {/* Contenedor con scroll horizontal en móvil */}
             <div className="overflow-x-auto scrollbar-hide -mx-6 px-6">

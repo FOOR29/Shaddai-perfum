@@ -1,6 +1,6 @@
-import Link from "next/link"
 import PerfumeList from "../components/PerfumList"
 import GenderFilter from "../components/perfum/GenderFilter"
+import Header from "../components/layouts/Header"
 import { Gender } from "@prisma/client"
 
 type HomeProps = {
@@ -8,11 +8,9 @@ type HomeProps = {
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
-  // Obtener el parámetro de género de la URL
   const params = await searchParams
   const genderParam = params.gender
 
-  // Validar que sea un género válido o null
   const validGender =
     genderParam === "MASCULINO" ||
       genderParam === "FEMENINO" ||
@@ -22,12 +20,12 @@ const Home = async ({ searchParams }: HomeProps) => {
 
   return (
     <div className="min-h-screen">
-      <h1>Home</h1>
-      <Link href="/login">admin</Link>
+      <Header />
 
       {/* Componente de filtrado */}
       <GenderFilter />
 
+      {/* Lista de perfumes */}
       <main>
         <PerfumeList genderFilter={validGender} />
       </main>

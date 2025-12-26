@@ -1,11 +1,8 @@
 "use server"
-// esto se encarga de poder poder ejecutar el SigIn
 
 import z, { success } from "zod";
 import { LoginInSchema } from "../lib/zod";
 import { AuthError } from "next-auth";
-import { db } from "../lib/db";
-import bcrypt from "bcryptjs";
 import { signIn } from "../auth";
 
 
