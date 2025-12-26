@@ -1,5 +1,5 @@
 import { db } from "@/src/lib/db"
-import PerfumeCard from "./PerfumCard"
+import PerfumeGrid from "./perfum/PerfumeGrid"
 
 async function getPerfumes() {
     try {
@@ -33,22 +33,7 @@ const PerfumeList = async () => {
         )
     }
 
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
-            {perfumes.map((perfume) => (
-                <PerfumeCard
-                    key={perfume.id.toString()}  // BigInt a string para React
-                    id={perfume.id}
-                    name={perfume.name}
-                    brand={perfume.brand.name}
-                    gender={perfume.gender}
-                    category={perfume.category}
-                    imageUrl={perfume.imageUrl}
-                    isAvailable={perfume.isAvailable}
-                />
-            ))}
-        </div>
-    )
+    return <PerfumeGrid perfumes={perfumes} />
 }
 
 export default PerfumeList

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import PerfumeList from "../components/PermunList"
+import PerfumeList from "../components/PerfumList"
 
 const Home = () => {
   return (
