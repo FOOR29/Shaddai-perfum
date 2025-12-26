@@ -1,15 +1,19 @@
 import { db } from "@/src/lib/db"
 import PerfumeGrid from "./perfum/PerfumeGrid"
+import { Gender } from "@prisma/client"
 
-async function getPerfumes() {
+// Función para obtener perfumes con filtro opcional
+async function getPerfumes(genderFilter?: Gender | null) {
     try {
-        // Prisma obtiene todos los perfumes con su marca relacionada
         const perfumes = await db.perfume.findMany({
+            where: genderFilter
+                ? { gender: genderFilter }  // Filtrar por género si existe
+                : {},                        // Sin filtro = todos
             include: {
-                brand: true,  // Incluye los datos de la marca (relación)
+                brand: true,
             },
             orderBy: {
-                createdAt: "desc"  // Los más recientes primero
+                createdAt: "desc"
             }
         })
         return perfumes
@@ -19,15 +23,16 @@ async function getPerfumes() {
     }
 }
 
-const PerfumeList = async () => {
+// Componente ahora acepta el filtro como prop
+const PerfumeList = async ({ genderFilter }: { genderFilter?: Gender | null }) => {
+    const perfumes = await getPerfumes(genderFilter)
 
-    const perfumes = await getPerfumes()
-    // Si no hay perfumes, mostrar mensaje
     if (perfumes.length === 0) {
         return (
             <div className="text-center py-12">
                 <p className="text-gray-600 text-lg">
                     No hay perfumes disponibles
+                    {genderFilter && ` en la categoría seleccionada`}
                 </p>
             </div>
         )
