@@ -5,6 +5,14 @@ import { db } from "@/src/lib/db"
 import { PerfumeSchema, UpdatePerfumeSchema } from "@/src/lib/zod"
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
+import { v2 as cloudinary } from 'cloudinary'  // ✅ IMPORTAR
+
+// ✅ Configurar Cloudinary
+cloudinary.config({
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 // Helper para verificar autenticación de admin
 async function verifyAdmin() {
@@ -13,12 +21,22 @@ async function verifyAdmin() {
         throw new Error("No autorizado")
     }
 
-    // ✅ AGREGAR: Verificar que el ID existe
     if (!session.user.id) {
         throw new Error("ID de usuario no encontrado en la sesión")
     }
 
     return session.user
+}
+
+// ✅ NUEVO: Helper para eliminar imagen de Cloudinary
+async function deleteImageFromCloudinary(publicId: string) {
+    try {
+        await cloudinary.uploader.destroy(publicId)
+        console.log('Imagen eliminada de Cloudinary:', publicId)
+    } catch (error) {
+        console.error('Error al eliminar imagen de Cloudinary:', error)
+        // No lanzar error, solo loguear (la BD se limpia igual)
+    }
 }
 
 // ============================================
@@ -31,15 +49,11 @@ export async function createPerfumeAction(values: z.infer<typeof PerfumeSchema>)
         // Validar con Zod
         const validatedData = PerfumeSchema.parse(values)
 
-        // ✅ CORREGIDO: Convertir correctamente el ownerAdminId
         const ownerAdminId = typeof user.id === 'string' ? parseInt(user.id) : Number(user.id)
 
-        // Verificar que el parsing fue exitoso
         if (isNaN(ownerAdminId)) {
             throw new Error(`ID de admin inválido: ${user.id}`)
         }
-
-        console.log('Creando perfume con ownerAdminId:', ownerAdminId) // Debug
 
         // Crear perfume en la BD
         await db.perfume.create({
@@ -50,8 +64,9 @@ export async function createPerfumeAction(values: z.infer<typeof PerfumeSchema>)
                 category: validatedData.category,
                 description: validatedData.description,
                 imageUrl: validatedData.imageUrl,
+                imagePublicId: validatedData.imagePublicId || null,  // ✅ NUEVO
                 isAvailable: validatedData.isAvailable,
-                ownerAdminId: ownerAdminId  // ✅ Ya verificado
+                ownerAdminId: ownerAdminId
             }
         })
 
@@ -62,7 +77,6 @@ export async function createPerfumeAction(values: z.infer<typeof PerfumeSchema>)
         if (error instanceof z.ZodError) {
             return { success: false, error: error.issues[0].message }
         }
-        // ✅ Mostrar el mensaje de error real
         if (error instanceof Error) {
             return { success: false, error: error.message }
         }
@@ -89,6 +103,11 @@ export async function updatePerfumeAction(values: z.infer<typeof UpdatePerfumeSc
             return { success: false, error: "Perfume no encontrado" }
         }
 
+        // ✅ Si cambió la imagen, eliminar la anterior de Cloudinary
+        if (perfume.imagePublicId && perfume.imageUrl !== validatedData.imageUrl) {
+            await deleteImageFromCloudinary(perfume.imagePublicId)
+        }
+
         // Actualizar en la BD
         await db.perfume.update({
             where: { id: BigInt(validatedData.id) },
@@ -99,6 +118,7 @@ export async function updatePerfumeAction(values: z.infer<typeof UpdatePerfumeSc
                 category: validatedData.category,
                 description: validatedData.description,
                 imageUrl: validatedData.imageUrl,
+                imagePublicId: validatedData.imagePublicId || null,  // ✅ NUEVO
                 isAvailable: validatedData.isAvailable
             }
         })
@@ -132,6 +152,11 @@ export async function deletePerfumeAction(perfumeId: bigint) {
 
         if (!perfume) {
             return { success: false, error: "Perfume no encontrado" }
+        }
+
+        // ✅ NUEVO: Eliminar imagen de Cloudinary si existe
+        if (perfume.imagePublicId) {
+            await deleteImageFromCloudinary(perfume.imagePublicId)
         }
 
         // Eliminar de la BD
@@ -175,7 +200,8 @@ export async function getPerfumeByIdAction(perfumeId: string) {
                 ...perfume,
                 id: perfume.id.toString(),
                 brandId: perfume.brandId.toString(),
-                ownerAdminId: perfume.ownerAdminId.toString()
+                ownerAdminId: perfume.ownerAdminId.toString(),
+                imagePublicId: perfume.imagePublicId || undefined  // ✅ NUEVO
             }
         }
     } catch (error) {
@@ -200,7 +226,6 @@ export async function getBrandsAction() {
             }
         })
 
-        // Convertir BigInt a string
         return {
             success: true,
             data: brands.map(brand => ({

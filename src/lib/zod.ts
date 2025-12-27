@@ -24,10 +24,8 @@ export const PerfumeSchema = z.object({
     brandId: z.string()
         .min(1, "Debes seleccionar una marca"),
 
-    // ✅ CORREGIDO: En Zod 4.x solo se pasa el array
     gender: z.enum(["MASCULINO", "FEMENINO", "UNISEX"]),
 
-    // ✅ CORREGIDO: En Zod 4.x solo se pasa el array
     category: z.enum(["ONE_ONE", "PREPARADO"]),
 
     description: z.string()
@@ -37,6 +35,8 @@ export const PerfumeSchema = z.object({
     imageUrl: z.string()
         .url("Debe ser una URL válida")
         .min(1, "La imagen es obligatoria"),
+
+    imagePublicId: z.string().optional(),  // ✅ NUEVO
 
     isAvailable: z.boolean()
 })

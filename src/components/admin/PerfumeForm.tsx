@@ -23,6 +23,7 @@ type PerfumeFormProps = {
         category: "ONE_ONE" | "PREPARADO"
         description: string
         imageUrl: string
+        imagePublicId?: string
         isAvailable: boolean
     }
     brands: { id: string; name: string }[]
@@ -50,6 +51,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
             category: "ONE_ONE",
             description: "",
             imageUrl: "",
+            imagePublicId: "",
             isAvailable: true
         }
     })
@@ -57,7 +59,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
     const imageUrl = watch("imageUrl")
     const isAvailable = watch("isAvailable")
 
-    // ✅ NUEVO: Función para subir imagen a Cloudinary
+    // Función para subir imagen a Cloudinary
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (!file) return
@@ -94,8 +96,9 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
                 throw new Error(data.error || 'Error al subir la imagen')
             }
 
-            // ✅ Establecer la URL en el formulario
+            // ✅ Establecer la URL y el publicId en el formulario
             setValue('imageUrl', data.url, { shouldValidate: true })
+            setValue('imagePublicId', data.publicId)  // ✅ AGREGADO
             setUploadSuccess(true)
 
             // Quitar mensaje de éxito después de 3 segundos
@@ -134,7 +137,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* ✅ NUEVO: Upload de imagen */}
+            {/* Upload de imagen */}
             <div className="bg-white rounded-xl border-2 border-dashed border-gray-300 p-6">
                 <div className="flex flex-col items-center">
                     {/* Preview de imagen */}
@@ -192,8 +195,9 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
                 </div>
             </div>
 
-            {/* Campo oculto para la URL (la setea handleImageUpload) */}
+            {/* Campos ocultos para imageUrl e imagePublicId */}
             <input type="hidden" {...register("imageUrl")} />
+            <input type="hidden" {...register("imagePublicId")} />  {/* ✅ AGREGADO */}
             {errors.imageUrl && (
                 <p className="text-xs text-red-500 text-center -mt-3">{errors.imageUrl.message}</p>
             )}

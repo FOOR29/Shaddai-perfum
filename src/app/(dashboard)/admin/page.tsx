@@ -48,12 +48,6 @@ const AdminPage = async () => {
             <div className="px-4">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-bold text-titular">All Products</h2>
-                    <Link
-                        href="/admin/perfumes"
-                        className="text-sm font-semibold text-cta hover:underline"
-                    >
-                        View All
-                    </Link>
                 </div>
 
                 <PerfumeList perfumes={perfumes} />

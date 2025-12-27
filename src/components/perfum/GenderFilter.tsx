@@ -8,16 +8,15 @@ const GenderFilter = () => {
     const searchParams = useSearchParams()
     const currentGender = searchParams.get("gender") || "TODO"
 
-    // Función para cambiar el filtro
     const handleFilter = (gender: string) => {
         if (gender === "TODO") {
             router.push("/")
         } else {
             router.push(`/?gender=${gender}`)
         }
+        router.refresh()  // ✅ ASEGÚRATE DE TENER ESTO
     }
 
-    // Array de filtros
     const filters = [
         { value: "TODO", label: "Todo" },
         { value: "MASCULINO", label: "Hombre" },
@@ -27,8 +26,6 @@ const GenderFilter = () => {
 
     return (
         <div className="px-6 py-4 -mb-2.5">
-
-            {/* Contenedor con scroll horizontal en móvil */}
             <div className="overflow-x-auto scrollbar-hide -mx-6 px-6">
                 <div className="flex gap-2 min-w-max">
                     {filters.map((filter) => {

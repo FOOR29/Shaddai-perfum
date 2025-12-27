@@ -5,10 +5,18 @@ import { Gender } from "@prisma/client"
 // Función para obtener perfumes con filtro opcional
 async function getPerfumes(genderFilter?: Gender | null) {
     try {
+        const whereClause: any = {
+            isAvailable: true
+        }
+
+        if (genderFilter) {
+            whereClause.gender = genderFilter
+        }
+
+        console.log('🔍 Filtrando con:', whereClause)
+
         const perfumes = await db.perfume.findMany({
-            where: genderFilter
-                ? { gender: genderFilter }  // Filtrar por género si existe
-                : {},                        // Sin filtro = todos
+            where: whereClause,
             include: {
                 brand: true,
             },
@@ -16,6 +24,15 @@ async function getPerfumes(genderFilter?: Gender | null) {
                 createdAt: "desc"
             }
         })
+
+        console.log('📦 Perfumes encontrados:', perfumes.length)
+        console.log('📋 Perfumes:', perfumes.map(p => ({
+            id: p.id,
+            name: p.name,
+            gender: p.gender,
+            isAvailable: p.isAvailable
+        })))
+
         return perfumes
     } catch (error) {
         console.error("Error al obtener perfumes:", error)
@@ -38,7 +55,11 @@ const PerfumeList = async ({ genderFilter }: { genderFilter?: Gender | null }) =
         )
     }
 
-    return <PerfumeGrid perfumes={perfumes} />
+    // ✅ AGREGAR KEY ÚNICA que cambie con cada filtro
+    // Esto fuerza a React a desmontar y remontar PerfumeGrid
+    const gridKey = genderFilter || 'all'
+
+    return <PerfumeGrid key={gridKey} perfumes={perfumes} />
 }
 
 export default PerfumeList
