@@ -44,7 +44,7 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="h-screen flex items-center justify-center bg-background px-4 py-4 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center w-80">
             {/* Botón volver - Posición absoluta arriba izquierda */}
             <Link
                 href="/"

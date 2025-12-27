@@ -18,7 +18,7 @@ const Header = () => {
     return (
         <>
             {/* Header fijo */}
-            <header className="sticky top-0 z-50 backdrop-blur-xs border-b border-gray-200">
+            <header className="sticky top-0 z-50 backdrop-blur-lg bg-card border-b border-gray-200">
                 <div className="flex items-center gap-3 px-4 py-3 max-w-7xl mx-auto">
                     {/* Botón hamburguesa (solo móvil) */}
                     <button
@@ -26,7 +26,7 @@ const Header = () => {
                         className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-200 transition-colors"
                         aria-label="Menu"
                     >
-                        <TiThMenu className="w-6 h-6 text-titular" />
+                        <TiThMenu className="w-6 h-6 text-cta" />
                     </button>
 
                     {/* Logo (solo desktop) */}

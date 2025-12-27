@@ -7,12 +7,12 @@ import authConfig from "@/auth.config";
 export const { handlers, signIn, signOut, auth } = NextAuth({
     // le pasamos el adaptador de prisma
     adapter: PrismaAdapter(db),
-    ...authConfig, // se destructura el authconfig
+    ...authConfig,
     session: { strategy: "jwt" },
 
     callbacks: {
         jwt({ token, user }) {
-            if (user) { // User is available during sign-in
+            if (user) {
                 token.role = user.role;
             }
             return token
