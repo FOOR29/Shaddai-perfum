@@ -8,10 +8,18 @@ import LogoutButton from "../ui/LogoutButton"
 type AdminHeaderProps = {
     userName: string
     userRole: string
+    onSearch: (query: string) => void  // ✅ AGREGAR callback
 }
 
-const AdminHeader = ({ userName, userRole }: AdminHeaderProps) => {
+const AdminHeader = ({ userName, userRole, onSearch }: AdminHeaderProps) => {
     const [showMenu, setShowMenu] = useState(false)
+    const [searchQuery, setSearchQuery] = useState("")  // ✅ AGREGAR estado
+
+    // ✅ Manejar búsqueda
+    const handleSearch = (value: string) => {
+        setSearchQuery(value)
+        onSearch(value)  // Enviar query al padre
+    }
 
     return (
         <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
@@ -22,6 +30,8 @@ const AdminHeader = ({ userName, userRole }: AdminHeaderProps) => {
                         <IoSearchOutline className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <input
                             type="text"
+                            value={searchQuery}  // ✅ Valor controlado
+                            onChange={(e) => handleSearch(e.target.value)}  // ✅ Handler
                             placeholder="Search by name, brand or version..."
                             className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-cta focus:border-transparent"
                         />
