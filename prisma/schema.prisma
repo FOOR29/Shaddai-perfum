@@ -62,10 +62,11 @@ model Perfume {
   ownerAdminId Int
   brandId      Int
 
-  name        String @db.VarChar(160)
+  name        String          @db.VarChar(160)
   gender      Gender
-  description String @db.VarChar(500)
-  imageUrl    String @db.VarChar(500)
+  category    PerfumeCategory @default(ONE_ONE)
+  description String          @db.VarChar(500)
+  imageUrl    String          @db.VarChar(500)
 
   isAvailable Boolean @default(true)
 

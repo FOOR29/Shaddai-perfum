@@ -1,6 +1,5 @@
 import type { ButtonHTMLAttributes } from "react";
 
-// Tipado simple usando 'type'
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: "primary" | "secondary" | "outline";
     size?: "sm" | "md" | "lg";
@@ -10,9 +9,9 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 const baseStyles = "inline-flex items-center justify-center font-semibold rounded-xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed";
 
 const variantStyles = {
-    primary: "bg-red-600 text-white hover:bg-red-700",
-    secondary: "bg-green-600 text-white hover:bg-green-700",
-    outline: "border border-neutral-400 text-neutral-800 hover:bg-neutral-100",
+    primary: "bg-cta text-cta-text hover:bg-cta-hover",
+    secondary: "bg-disponible text-white hover:bg-disponible-text",
+    outline: "border border-borde text-titular hover:bg-fondo",
 };
 
 const sizeStyles = {
