@@ -42,14 +42,14 @@ const PerfumeListItem = ({ perfume }: PerfumeListItemProps) => {
         return <span className="px-2 py-1 bg-green-100 text-green-600 text-xs font-bold rounded-full">Disponible</span>
     }
 
-    // Label de categoría
-    const getCategoryLabel = () => {
-        switch (perfume.category) {
-            case "ONE_ONE": return "1:1"
-            case "PREPARADO": return "Preparado"
-            default: return perfume.category
-        }
-    }
+    // // Label de categoría
+    // const getCategoryLabel = () => {
+    //     switch (perfume.category) {
+    //         case "ONE_ONE": return "1:1"
+    //         case "PREPARADO": return "Preparado"
+    //         default: return perfume.category
+    //     }
+    // }
 
     return (
         <div className="bg-white rounded-xl p-3 border border-gray-200 shadow-sm flex items-center gap-3">
@@ -61,12 +61,12 @@ const PerfumeListItem = ({ perfume }: PerfumeListItemProps) => {
                     fill
                     className="object-cover"
                 />
-                {/* Badge de categoría en la imagen */}
+                {/* Badge de categoría en la imagen
                 <div className="absolute top-1 left-1">
                     <span className="px-1.5 py-0.5 bg-orange-500 text-white text-[10px] font-bold rounded">
                         {getCategoryLabel()}
                     </span>
-                </div>
+                </div> */}
             </div>
 
             {/* Info */}

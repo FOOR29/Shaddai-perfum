@@ -20,7 +20,7 @@ const CreatePerfumePage = async () => {
                         <IoArrowBack className="w-6 h-6 text-titular" />
                     </Link>
                     <h1 className="text-xl font-extrabold text-titular">
-                        Create Perfume
+                        Crear Perfume
                     </h1>
                 </div>
             </div>

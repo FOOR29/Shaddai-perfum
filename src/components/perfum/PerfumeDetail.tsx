@@ -65,7 +65,7 @@ const PerfumeDetail = ({ perfume, categoryInfo }: PerfumeDetailProps) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-lg bg-gradient-to-br from-pink-200 to-purple-300"
+                    className="relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-lg from-pink-200 to-purple-300"
                 >
                     <Image
                         src={perfume.imageUrl}

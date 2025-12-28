@@ -47,15 +47,15 @@ const AdminPageClient = ({ initialPerfumes, stats }: AdminPageClientProps) => {
             <div className="px-4 pt-4 pb-6">
                 <StatsCards
                     totalProducts={stats.totalPerfumes}
-                    menPerfumes={stats.menPerfumes}        // ✅ NUEVO
-                    womenPerfumes={stats.womenPerfumes}    // ✅ NUEVO
+                    menPerfumes={stats.menPerfumes}
+                    womenPerfumes={stats.womenPerfumes}
                 />
             </div>
 
             <div className="px-4">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-bold text-titular">
-                        All Products
+                        Todo el catalogo
                         {searchQuery && ` (${filteredPerfumes.length})`}
                     </h2>
                 </div>

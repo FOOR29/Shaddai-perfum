@@ -205,7 +205,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
             {/* Nombre */}
             <div>
                 <label className="block text-sm font-semibold text-titular mb-2">
-                    Perfume Name
+                    Nombre del Perfume
                 </label>
                 <Input
                     placeholder="Ej: Chanel No. 5"
@@ -220,7 +220,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
             {/* Marca */}
             <div>
                 <label className="block text-sm font-semibold text-titular mb-2">
-                    Brand
+                    Marca
                 </label>
                 <select
                     {...register("brandId")}
@@ -242,7 +242,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
             {/* Categoría */}
             <div>
                 <label className="block text-sm font-semibold text-titular mb-2">
-                    Category
+                    Categoria
                 </label>
                 <select
                     {...register("category")}
@@ -260,7 +260,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
             {/* Género */}
             <div>
                 <label className="block text-sm font-semibold text-titular mb-3">
-                    Gender
+                    Genero
                 </label>
                 <div className="space-y-2">
                     {[
@@ -292,7 +292,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
             {/* Descripción */}
             <div>
                 <label className="block text-sm font-semibold text-titular mb-2">
-                    Description
+                    Descripción
                 </label>
                 <textarea
                     {...register("description")}
@@ -311,7 +311,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="font-semibold text-titular text-sm mb-1">
-                            Showroom Status
+                            Estado del perfume
                         </p>
                         <p className="text-xs text-subtitulo">
                             Disponible para mostrar en el catálogo
@@ -342,14 +342,14 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
                     onClick={() => router.back()}
                     className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-colors"
                 >
-                    Cancel
+                    Cancelar
                 </button>
                 <Button
                     type="submit"
                     disabled={isPending || isUploadingImage}
                     className="flex-1 primary py-3"
                 >
-                    {isPending ? "Guardando..." : mode === "create" ? "Create Perfume" : "Save Changes"}
+                    {isPending ? "Guardando..." : mode === "create" ? "Crear Perfume" : "Guardar Cambios"}
                 </Button>
             </div>
         </form>

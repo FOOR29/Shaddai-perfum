@@ -39,7 +39,7 @@ const EditPerfumePage = async ({ params }: EditPerfumePageProps) => {
                     </Link>
                     <div className="flex-1">
                         <h1 className="text-xl font-extrabold text-titular">
-                            Edit Perfume
+                            Editar Perfume
                         </h1>
                         <p className="text-sm text-subtitulo">
                             {perfume.name}
