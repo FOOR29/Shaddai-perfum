@@ -3,8 +3,7 @@ import GenderFilter from "../components/perfum/GenderFilter"
 import Header from "../components/layouts/Header"
 import { Gender } from "@prisma/client"
 
-// ✅ AGREGAR ESTAS LÍNEAS al inicio (fuera del componente)
-export const dynamic = 'force-dynamic'  // Forzar renderizado dinámico
+export const dynamic = 'force-dynamic'
 export const revalidate = 0  // Nunca cachear
 
 type HomeProps = {

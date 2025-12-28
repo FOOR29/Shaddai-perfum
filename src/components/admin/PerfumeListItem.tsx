@@ -36,10 +36,10 @@ const PerfumeListItem = ({ perfume }: PerfumeListItemProps) => {
     // Badge de stock
     const getStockBadge = () => {
         if (!perfume.isAvailable) {
-            return <span className="px-2 py-1 bg-red-100 text-red-600 text-xs font-bold rounded-full">Out of Stock</span>
+            return <span className="px-2 py-1 bg-red-100 text-red-600 text-xs font-bold rounded-full">Agotado</span>
         }
         // Aquí puedes agregar lógica para "Low in stock" si tienes un campo de cantidad
-        return <span className="px-2 py-1 bg-green-100 text-green-600 text-xs font-bold rounded-full">In Stock</span>
+        return <span className="px-2 py-1 bg-green-100 text-green-600 text-xs font-bold rounded-full">Disponible</span>
     }
 
     // Label de categoría
@@ -75,7 +75,7 @@ const PerfumeListItem = ({ perfume }: PerfumeListItemProps) => {
                     {perfume.name}
                 </h3>
                 <p className="text-xs text-subtitulo mb-2">
-                    {perfume.brand.name} • {getCategoryLabel()} • {perfume.gender}
+                    {perfume.brand.name} • {perfume.gender}
                 </p>
                 {getStockBadge()}
             </div>

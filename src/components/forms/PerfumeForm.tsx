@@ -157,8 +157,8 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
                     <label
                         htmlFor="file-upload"
                         className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer transition-colors ${isUploadingImage
-                                ? 'bg-gray-300 cursor-not-allowed'
-                                : 'bg-cta hover:bg-cta-hover text-white'
+                            ? 'bg-gray-300 cursor-not-allowed'
+                            : 'bg-cta hover:bg-cta-hover text-white'
                             }`}
                     >
                         {isUploadingImage ? (
@@ -189,7 +189,7 @@ const PerfumeForm = ({ mode, perfume, brands }: PerfumeFormProps) => {
                     {/* Mensaje de éxito */}
                     {uploadSuccess && (
                         <p className="text-sm text-green-600 font-semibold mt-2">
-                            ✅ Imagen subida correctamente
+                            Imagen subida correctamente
                         </p>
                     )}
                 </div>

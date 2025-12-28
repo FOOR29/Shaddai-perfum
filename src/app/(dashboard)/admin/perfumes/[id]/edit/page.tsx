@@ -1,7 +1,7 @@
 import { IoArrowBack } from "react-icons/io5"
 import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
-import PerfumeForm from "@/src/components/admin/PerfumeForm"
+import PerfumeForm from "@/src/components/forms/PerfumeForm"
 import { getPerfumeByIdAction, getBrandsAction } from "@/src/actions/perfume-actions"
 
 type EditPerfumePageProps = {

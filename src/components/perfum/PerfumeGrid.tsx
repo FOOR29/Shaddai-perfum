@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import PerfumeCard from "../PerfumCard"
+import PerfumeCard from "../ui/PerfumCard"
 import { Perfume, Brand } from "@prisma/client"
 
 type PerfumeWithBrand = Perfume & {

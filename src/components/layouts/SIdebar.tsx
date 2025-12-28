@@ -30,7 +30,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         closed: {
             x: "-100%",
             transition: {
-                type: "spring",
+                type: "spring" as const,  // ✅ CORREGIDO
                 stiffness: 300,
                 damping: 30
             }
@@ -38,7 +38,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         open: {
             x: 0,
             transition: {
-                type: "spring",
+                type: "spring" as const,  // ✅ CORREGIDO
                 stiffness: 300,
                 damping: 30
             }

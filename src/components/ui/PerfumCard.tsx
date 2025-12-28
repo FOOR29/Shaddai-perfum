@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { PerfumeCardProps } from "../types"
-import Button from "./ui/Button"
+import { PerfumeCardProps } from "../../types"
+import Button from "./Button"
 
 
 const PerfumeCard = ({

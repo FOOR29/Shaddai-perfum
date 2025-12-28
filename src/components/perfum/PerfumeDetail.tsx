@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import CategorySelector from "./CategorySelector"
-import WhatsAppButton from "./WhatsAppButton"
+import WhatsAppButton from "../ui/WhatsAppButton"
 import { Perfume, Brand, PerfumeCategoryInfo } from "@prisma/client"
 
 type PerfumeWithBrand = Perfume & {

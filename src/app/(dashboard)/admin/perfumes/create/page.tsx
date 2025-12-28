@@ -1,6 +1,6 @@
 import { IoArrowBack } from "react-icons/io5"
 import Link from "next/link"
-import PerfumeForm from "@/src/components/admin/PerfumeForm"
+import PerfumeForm from "@/src/components/forms/PerfumeForm"
 import { getBrandsAction } from "@/src/actions/perfume-actions"
 
 const CreatePerfumePage = async () => {

@@ -12,8 +12,8 @@ type AdminPageClientProps = {
     initialPerfumes: Perfume[]
     stats: {
         totalPerfumes: number
-        pendingReviews: number
-        totalViews: number
+        menPerfumes: number
+        womenPerfumes: number
     }
 }
 
@@ -47,8 +47,8 @@ const AdminPageClient = ({ initialPerfumes, stats }: AdminPageClientProps) => {
             <div className="px-4 pt-4 pb-6">
                 <StatsCards
                     totalProducts={stats.totalPerfumes}
-                    pendingReviews={stats.pendingReviews}
-                    totalViews={stats.totalViews}
+                    menPerfumes={stats.menPerfumes}        // ✅ NUEVO
+                    womenPerfumes={stats.womenPerfumes}    // ✅ NUEVO
                 />
             </div>
 

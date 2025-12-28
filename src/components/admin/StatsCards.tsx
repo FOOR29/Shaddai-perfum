@@ -1,33 +1,33 @@
-import { IoStorefrontOutline, IoTimeOutline, IoEyeOutline } from "react-icons/io5"
+import { IoStorefrontOutline, IoMaleFemaleOutline, IoManOutline, IoWomanOutline } from "react-icons/io5"
 
 type StatsCardsProps = {
     totalProducts: number
-    pendingReviews: number
-    totalViews: number
+    menPerfumes: number
+    womenPerfumes: number
 }
 
-const StatsCards = ({ totalProducts, pendingReviews, totalViews }: StatsCardsProps) => {
+const StatsCards = ({ totalProducts, menPerfumes, womenPerfumes }: StatsCardsProps) => {
     const stats = [
         {
             icon: IoStorefrontOutline,
-            label: "Total Products",
+            label: "Total de Perfumes",
             value: totalProducts,
             bgColor: "bg-green-50",
             iconColor: "text-green-600"
         },
         {
-            icon: IoTimeOutline,
-            label: "Pending reviews",
-            value: pendingReviews,
-            bgColor: "bg-orange-50",
-            iconColor: "text-orange-600"
-        },
-        {
-            icon: IoEyeOutline,
-            label: "Total Views",
-            value: totalViews >= 1000 ? `${(totalViews / 1000).toFixed(1)}k` : totalViews,
+            icon: IoManOutline,
+            label: "Perfumes de Hombre",
+            value: menPerfumes,
             bgColor: "bg-blue-50",
             iconColor: "text-blue-600"
+        },
+        {
+            icon: IoWomanOutline,
+            label: "Perfumes de Mujer",
+            value: womenPerfumes,
+            bgColor: "bg-pink-50",
+            iconColor: "text-pink-600"
         }
     ]
 
