@@ -30,7 +30,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         closed: {
             x: "-100%",
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 300,
                 damping: 30
             }
@@ -38,7 +38,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         open: {
             x: 0,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 300,
                 damping: 30
             }
@@ -57,7 +57,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                     className="fixed top-0 left-0 h-full w-64 bg-cta z-50 shadow-2xl overflow-y-auto"
                 >
                     {/* Header del sidebar */}
-                    <div className="flex items-center justify-between p-4 border-b border-cta-hover">
+                    <div className="flex items-center justify-between p-4 border-b border-cta-">
                         <h2 className="text-xl font-extrabold text-white">
                             SHADDAI PERFUM
                         </h2>

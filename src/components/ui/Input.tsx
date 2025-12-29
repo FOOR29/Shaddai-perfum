@@ -9,10 +9,10 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     variant?: "default" | "underline";
 };
 
-const baseStyles = "w-full rounded-xl border border-neutral-300 bg-white px-4 py-2 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition";
+const baseStyles = "w-full rounded-xl border border-neutral-300 bg-white px-4 py-2 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#DAD8D6] focus:border-[#DAD8D6] transition";
 
 const underlineStyles =
-    "w-full border-b border-neutral-400 rounded-none px-1 py-2 bg-transparent focus:border-red-500";
+    "w-full border-b border-neutral-400 rounded-none px-1 py-2 bg-transparent focus:border-[#DAD8D6]";
 
 const Input = ({ label, error, variant = "default", className = "", ...props }: InputProps) => {
     return (

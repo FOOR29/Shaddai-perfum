@@ -58,13 +58,13 @@ const LoginForm = () => {
             <div className="w-full max-w-md">
                 <div>
                     {/* Logo */}
-                    <div className="flex justify-center mb-3">
+                    {/* <div className="flex justify-center mb-3">
                         <div className="w-14 h-14 sm:w-16 sm:h-16 bg-cta rounded-2xl flex items-center justify-center">
                             <div className="w-10 h-10 sm:w-12 sm:h-12 border-4 border-white rounded-full flex items-center justify-center">
                                 <div className="w-2 h-4 border-b-4 border-r-4 border-white rotate-45 -mt-1"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Título */}
                     <div className="text-center mb-6">
@@ -72,7 +72,7 @@ const LoginForm = () => {
                             Shaddai Perfum
                         </h1>
                         <p className="text-subtitulo text-xs sm:text-sm font-semibold">
-                            Admin Portal
+                            Portal Administrador
                         </p>
                     </div>
 

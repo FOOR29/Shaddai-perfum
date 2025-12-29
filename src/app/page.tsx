@@ -3,6 +3,9 @@ import GenderFilter from "../components/perfum/GenderFilter"
 import Header from "../components/layouts/Header"
 import { Gender } from "@prisma/client"
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0  // Nunca cachear
+
 type HomeProps = {
   searchParams: Promise<{ gender?: string }>
 }

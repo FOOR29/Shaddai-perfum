@@ -1,23 +1,41 @@
-import { auth } from "@/src/auth"
-import LogoutButton from "@/src/components/ui/LogoutButton";
+import { db } from "@/src/lib/db"
+import AdminPageClient from "@/src/components/admin/AdminPageClient"
+
+async function getStats() {
+    const totalPerfumes = await db.perfume.count()
+
+    const menPerfumes = await db.perfume.count({
+        where: { gender: "MASCULINO" }
+    })
+
+    const womenPerfumes = await db.perfume.count({
+        where: { gender: "FEMENINO" }
+    })
+
+    return {
+        totalPerfumes,
+        menPerfumes,
+        womenPerfumes
+    }
+}
+
+// Función para obtener perfumes
+async function getPerfumes() {
+    return await db.perfume.findMany({
+        include: {
+            brand: true
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    })
+}
 
 const AdminPage = async () => {
-    const session = await auth()
-    console.log(session);
+    const stats = await getStats()
+    const perfumes = await getPerfumes()
 
-    if (session?.user?.role !== 'ADMIN') {
-        return <div>You are not admin</div>
-    }
-    return (
-        <div>
-            <pre>
-                {
-                    JSON.stringify(session, null, 2)
-                }
-            </pre>
-            <LogoutButton />
-        </div>
-    )
+    return <AdminPageClient initialPerfumes={perfumes} stats={stats} />
 }
 
 export default AdminPage

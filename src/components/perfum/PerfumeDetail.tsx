@@ -1,10 +1,10 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import CategorySelector from "./CategorySelector"
-import WhatsAppButton from "./WhatsAppButton"
+import WhatsAppButton from "../ui/WhatsAppButton"
 import { Perfume, Brand, PerfumeCategoryInfo } from "@prisma/client"
 
 type PerfumeWithBrand = Perfume & {
@@ -16,7 +16,6 @@ type PerfumeDetailProps = {
     categoryInfo: PerfumeCategoryInfo[]
 }
 
-// Función auxiliar para el género
 function getGenderLabel(gender: string) {
     switch (gender) {
         case "MASCULINO":
@@ -31,11 +30,13 @@ function getGenderLabel(gender: string) {
 }
 
 const PerfumeDetail = ({ perfume, categoryInfo }: PerfumeDetailProps) => {
+    const router = useRouter()
+
     return (
         <div className="min-h-screen bg-background">
             <header className="sticky top-0 z-50 bg-white shadow-sm p-4 flex items-center gap-4">
-                <Link
-                    href="/"
+                <button
+                    onClick={() => router.back()}
                     className="flex items-center justify-center w-10 h-10 rounded-full bg-cta hover:bg-cta-hover text-cta-text transition-colors"
                 >
                     <svg
@@ -48,7 +49,7 @@ const PerfumeDetail = ({ perfume, categoryInfo }: PerfumeDetailProps) => {
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                     </svg>
-                </Link>
+                </button>
                 <h1 className="text-lg font-extrabold text-titular truncate">
                     Shaddai Perfum
                 </h1>
@@ -65,7 +66,7 @@ const PerfumeDetail = ({ perfume, categoryInfo }: PerfumeDetailProps) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-lg bg-gradient-to-br from-pink-200 to-purple-300"
+                    className="relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-lg from-pink-200 to-purple-300"
                 >
                     <Image
                         src={perfume.imageUrl}

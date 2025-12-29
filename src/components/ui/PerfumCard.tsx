@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { PerfumeCardProps } from "../types"
-import Button from "./ui/Button"
+import { PerfumeCardProps } from "../../types"
+import Button from "./Button"
 
 
 const PerfumeCard = ({
@@ -56,7 +56,7 @@ const PerfumeCard = ({
                     <h3 className="font-extrabold text-lg text-titular line-clamp-1">
                         {name}
                     </h3>
-                    <span className="text-sm text-center bg-chip-inactivo py-0.5 px-3 rounded-full text-subtitulo font-extrabold whitespace">
+                    <span className="text-sm text-center bg-chip-inactivo py-0.5 px-3 rounded-full text-secundario font-extrabold whitespace">
                         {getGenderLabel(gender)}
                     </span>
                 </div>
