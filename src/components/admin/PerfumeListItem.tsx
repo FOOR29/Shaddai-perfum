@@ -6,7 +6,8 @@ import Image from "next/image"
 import { IoPencil, IoTrash } from "react-icons/io5"
 import { deletePerfumeAction } from "@/src/actions/perfume-actions"
 import { useRouter } from "next/navigation"
-import { useState, useTransition } from "react"
+import { useTransition } from "react"
+import Swal from 'sweetalert2'
 
 type PerfumeWithBrand = Perfume & {
     brand: Brand
@@ -20,17 +21,46 @@ const PerfumeListItem = ({ perfume }: PerfumeListItemProps) => {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
 
+    // Handler con SweetAlert2
     const handleDelete = async () => {
-        if (!confirm(`¿Eliminar "${perfume.name}"?`)) return
-
-        startTransition(async () => {
-            const result = await deletePerfumeAction(perfume.id)
-            if (result.success) {
-                router.refresh()
-            } else {
-                alert(result.error)
-            }
+        const result = await Swal.fire({
+            title: '¿Eliminar este perfume?',
+            text: `Se eliminará "${perfume.name}" permanentemente`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
         })
+
+        // Si confirma, proceder a eliminar
+        if (result.isConfirmed) {
+            startTransition(async () => {
+                const deleteResult = await deletePerfumeAction(perfume.id)
+
+                if (deleteResult.success) {
+                    // Mensaje de éxito con SweetAlert2
+                    Swal.fire({
+                        title: '¡Eliminado!',
+                        text: 'El perfume ha sido eliminado correctamente',
+                        icon: 'success',
+                        confirmButtonColor: '#10b981',
+                        timer: 2000
+                    })
+                    router.refresh()
+                } else {
+                    // Mensaje de error con SweetAlert2
+                    Swal.fire({
+                        title: 'Error',
+                        text: deleteResult.error || 'No se pudo eliminar el perfume',
+                        icon: 'error',
+                        confirmButtonColor: '#ef4444'
+                    })
+                }
+            })
+        }
     }
 
     // Badge de stock
@@ -38,18 +68,8 @@ const PerfumeListItem = ({ perfume }: PerfumeListItemProps) => {
         if (!perfume.isAvailable) {
             return <span className="px-2 py-1 bg-red-100 text-red-600 text-xs font-bold rounded-full">Agotado</span>
         }
-        // Aquí puedes agregar lógica para "Low in stock" si tienes un campo de cantidad
         return <span className="px-2 py-1 bg-green-100 text-green-600 text-xs font-bold rounded-full">Disponible</span>
     }
-
-    // // Label de categoría
-    // const getCategoryLabel = () => {
-    //     switch (perfume.category) {
-    //         case "ONE_ONE": return "1:1"
-    //         case "PREPARADO": return "Preparado"
-    //         default: return perfume.category
-    //     }
-    // }
 
     return (
         <div className="bg-white rounded-xl p-3 border border-gray-200 shadow-sm flex items-center gap-3">
@@ -61,12 +81,6 @@ const PerfumeListItem = ({ perfume }: PerfumeListItemProps) => {
                     fill
                     className="object-cover"
                 />
-                {/* Badge de categoría en la imagen
-                <div className="absolute top-1 left-1">
-                    <span className="px-1.5 py-0.5 bg-orange-500 text-white text-[10px] font-bold rounded">
-                        {getCategoryLabel()}
-                    </span>
-                </div> */}
             </div>
 
             {/* Info */}

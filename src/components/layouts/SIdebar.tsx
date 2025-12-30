@@ -6,6 +6,7 @@ import { RiAdminFill, RiInstagramFill } from "react-icons/ri"
 import { FaShareAlt } from "react-icons/fa"
 import { IoLogoWhatsapp } from "react-icons/io"
 import { IoClose } from "react-icons/io5"
+import toast from 'react-hot-toast'
 
 type SidebarProps = {
     isOpen: boolean
@@ -14,14 +15,20 @@ type SidebarProps = {
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
-    // Función para copiar el enlace de la web
     const handleShare = async () => {
         const url = window.location.origin
         try {
             await navigator.clipboard.writeText(url)
-            alert("¡Enlace copiado al portapapeles!")
+            toast.success('¡Enlace copiado al portapapeles!', {
+                position: "bottom-center",
+                duration: 2500,
+                icon: '✓',
+            })
         } catch (err) {
             console.error("Error al copiar:", err)
+            toast.error('No se pudo copiar el enlace', {
+                position: "bottom-center"
+            })
         }
     }
 
@@ -57,7 +64,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                     className="fixed top-0 left-0 h-full w-64 bg-cta z-50 shadow-2xl overflow-y-auto"
                 >
                     {/* Header del sidebar */}
-                    <div className="flex items-center justify-between p-4 border-b border-cta-">
+                    <div className="flex items-center justify-between p-4 border-b border-cta-hover">
                         <h2 className="text-xl font-extrabold text-white">
                             SHADDAI PERFUM
                         </h2>
