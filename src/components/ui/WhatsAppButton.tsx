@@ -18,7 +18,7 @@ const WhatsAppButton = ({
 }: WhatsAppButtonProps) => {
 
     const handleWhatsApp = () => {
-        const phoneNumber = "573022039714"
+        const phoneNumber = "573014268105"
 
         const perfumeUrl = `${window.location.origin}/perfum/${perfumeId}`
 
