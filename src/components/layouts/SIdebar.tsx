@@ -105,7 +105,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                             {/* Instagram */}
                             <li>
                                 <a
-                                    href="#"
+                                    href="https://www.instagram.com/shaddai_parfum/"
                                     className="flex items-center gap-3 px-4 py-3 text-white hover:bg-cta-hover rounded-lg transition-colors font-semibold"
                                 >
                                     <RiInstagramFill className="w-6 h-6" />
